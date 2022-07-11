@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[tmargin=1.0in, lmargin=0.8in, rmargin=0.8in]{geometry}
+\usepackage{floatrow}
+%\DeclareUnicodeCharacter{2212}{-}
+\usepackage{graphicx}
+\usepackage{amsmath,bm, amsfonts}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\title{\huge Stochastic filtering\\ \large using nonlinear Vector Auto Regression}
+\date{\today}
+%\author{\normalsize Rahul O R}
+\begin{document}
+\maketitle
+\vspace*{-1.cm}
+\VerbatimInput{inputs.py}
+\VerbatimInput{config.py}
+\section*{Ridge regression of $y = \text{logit}(p)$}
+For a detailed discussion, please refer :\\
+\emph{Learning stochastic filtering} \(|\)
+\href{https://arxiv.org/abs/2206.13018}{arXiv:2206.13018 } \(|\)
+{{Rahul O. Ramakrishnan}}, {Andrea Auconi}, {Benjamin M. Friedrich}\\
+
+
+\begin{itemize}
+\item[$\circ$] From the noisy signal $u(t)$, the optimal filter produces the probability $p(t)$. i.e., $p \in (0,1)$
+\item[$\circ$] Let 
+\begin{equation}
+y = \text{logit} (p) = \ln\left(\frac{p}{1-p} \right),
+\end{equation}
+where, $y \in (-\infty, \infty)$
+\item[$\circ$] The nVAR algorithm in fact fit $u(t)$ into $y(t)$. This a ridge regression:
+\begin{equation}
+y = W \cdot \mathbb{O},
+\end{equation}
+where, $W$ is the weights that has to be optimized and $\mathbb{O}$ is the `feature vector' constructed using liner and non-linear combinations of delay-terms taken from $u$. The optimization process seeks for a global minima of the below loss function,
+\begin{equation}
+\text{loss} = \text{mse}(y \text{(true)}, \widehat{y}\text{(pred)}) + \beta \Vert W \Vert^2,
+\end{equation}
+where, $\beta$ is the ridge parameter that penalizing the size of weights.
+
+\item[$\circ$] The predicted output $\widehat{y}$ is transformed to corresponding probability through a sigmoid function:
+\begin{equation}
+\widehat{p} = \frac{1}{1+ e^{-\widehat{y}}}
+\end{equation}
+\end{itemize}
+
+\VerbatimInput{data/result.txt}
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.9]{fig/dataset.pdf}
+	\caption{open \texttt{view\textunderscore plot.html} for better view}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.7]{fig/weight.pdf}
+	\caption{learned weights}
+\end{figure}
+\pagebreak
+\end{document}
+
+
