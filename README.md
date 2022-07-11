@@ -1,5 +1,4 @@
-# stoch_filter_nvar : nonlinear Vector Auto Regression 
-## for time series analysis/inference 
+# stoch_filter_nvar : nonlinear Vector Auto Regression for time series analysis/inference 
 
 Implementation of nonlinear Vector Auto Regression (nVAR) for the stochastic filtering task
 
