@@ -2,7 +2,7 @@
 
 Implementation of nonlinear Vector Auto Regression (nVAR) for the stochastic filtering task
 
-For additional details, please refer [arXiv:2206.13018](https://arxiv.org/abs/2206.13018)
+For additional details, please refer [Rahul O. Ramakrishnan et al 2022 EPL 140 31002](https://iopscience.iop.org/article/10.1209/0295-5075/ac9d01)
 
 -----
 ### inputs
